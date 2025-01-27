@@ -2,11 +2,12 @@ package com.alpha.www.UserRestApis.service;
 
 import java.util.List;
 
+import com.alpha.www.UserRestApis.dto.UserDto;
 import com.alpha.www.UserRestApis.entity.User;
 
 public interface UserService {
 
-	User createUser(User user);
+	UserDto createUser(UserDto userDto);
 	
 	User getUserById(Long userId);
 	
