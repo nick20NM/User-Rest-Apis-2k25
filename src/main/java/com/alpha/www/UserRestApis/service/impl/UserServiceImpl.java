@@ -2,6 +2,7 @@ package com.alpha.www.UserRestApis.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -42,9 +43,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getAllUsers() {
+	public List<UserDto> getAllUsers() {
 		List<User> users = userRepository.findAll();
-		return users;
+		return users.stream()
+				.map(UserMapper::mapToUserDto)
+				.collect(Collectors.toList());
 	}
 
 	@Override
