@@ -22,6 +22,7 @@ import com.alpha.www.UserRestApis.exception.ErrorDetails;
 import com.alpha.www.UserRestApis.exception.ResourceNotFoundException;
 import com.alpha.www.UserRestApis.service.UserService;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -32,7 +33,7 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/create")
-	public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
 		UserDto savedUser = userService.createUser(userDto);
 		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
 	}
@@ -51,7 +52,7 @@ public class UserController {
 	@PutMapping("/{id}")
 	public ResponseEntity<UserDto> updateUser(
 			@PathVariable Long id, 
-			@RequestBody UserDto user){
+			@RequestBody @Valid UserDto user){
 		user.setId(id);
 		UserDto updatedUser = userService.updateUser(user);
 		return ResponseEntity.ok(updatedUser);
